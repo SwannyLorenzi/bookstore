@@ -1,4 +1,4 @@
-package fr.natsume.bookstore
+package fr.natsume.bookstore.book
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
