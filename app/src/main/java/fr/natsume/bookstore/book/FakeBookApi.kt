@@ -1,6 +1,5 @@
-package fr.natsume.bookstore
+package fr.natsume.bookstore.book
 
-import fr.natsume.bookstore.book.Book
 import timber.log.Timber
 
 private const val INDEX_OFFSET = 2
