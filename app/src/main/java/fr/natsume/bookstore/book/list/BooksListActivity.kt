@@ -1,7 +1,8 @@
-package fr.natsume.bookstore
+package fr.natsume.bookstore.book.list
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import fr.natsume.bookstore.R
 
 class BooksListActivity : AppCompatActivity() {
 
