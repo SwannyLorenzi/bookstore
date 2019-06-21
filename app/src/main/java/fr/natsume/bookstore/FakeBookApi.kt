@@ -46,16 +46,13 @@ class FakeBookApi {
 
     fun loadBooks(): List<Book> {
         val booksSize = BOOKS.size
-        var newBookIndex = (bookIndex + INDEX_OFFSET) % booksSize
 
-        if (newBookIndex == 0) {
-            newBookIndex = booksSize
-        }
+        val indices = List(INDEX_OFFSET) { (bookIndex + it) % booksSize }
 
-        Timber.i("Book range: $bookIndex / $newBookIndex")
-        val bookSlice = BOOKS.subList(bookIndex, newBookIndex)
+        Timber.i("Loading books indices: $indices")
+        val bookSlice = BOOKS.slice(indices)
 
-        bookIndex = newBookIndex % booksSize
+        bookIndex = (indices.last() + 1 ) % booksSize
 
         return bookSlice
     }
