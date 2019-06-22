@@ -3,6 +3,7 @@ package fr.natsume.bookstore.book.detail
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,8 @@ class BookDetailActivity : AppCompatActivity() {
 
         bookId = intent.getLongExtra(EXTRA_BOOK_ID, 1)
         Timber.d("Book id: $bookId")
+
+        bookSummary.movementMethod = ScrollingMovementMethod()
 
         val factory = BookDetailViewModelFactory(bookId)
         viewModel = ViewModelProviders.of(this, factory).get(BookDetailViewModel::class.java)
