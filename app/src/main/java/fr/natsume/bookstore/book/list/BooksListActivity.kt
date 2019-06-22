@@ -1,7 +1,9 @@
 package fr.natsume.bookstore.book.list
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -36,6 +38,32 @@ class BooksListActivity : AppCompatActivity(), BooksListAdapter.BooksListAdapter
         viewModel.books.observe(this, Observer { newBooks -> updateBooks(newBooks!!) })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK || data == null) {
+            return
+        }
+
+        when (requestCode) {
+            BookDetailActivity.REQUEST_DETAIL_BOOK -> processDetailBookResult(data)
+        }
+    }
+
+    private fun processDetailBookResult(data: Intent) {
+        val bookId = data.getLongExtra(BookDetailActivity.EXTRA_BOOK_ID, -1)
+        when (data.action) {
+            BookDetailActivity.ACTION_DELETE_BOOK -> {
+                deleteBook(bookId)
+            }
+        }
+    }
+
+    private fun deleteBook(bookId: Long) {
+        if (bookId < 0 ) return
+        viewModel.deleteBook(bookId)
+        Toast.makeText(this, "Book $bookId deleted.", Toast.LENGTH_SHORT).show()
+    }
+
     private fun updateBooks(newBooks: List<Book>) {
         Timber.d("Loading new books. ${newBooks.size} books loaded.")
         books.clear()
@@ -49,6 +77,6 @@ class BooksListActivity : AppCompatActivity(), BooksListAdapter.BooksListAdapter
         Timber.d("Select book: $book")
         val intent = Intent(this, BookDetailActivity::class.java)
         intent.putExtra(BookDetailActivity.EXTRA_BOOK_ID, book.id)
-        startActivity(intent)
+        startActivityForResult(intent, BookDetailActivity.REQUEST_DETAIL_BOOK)
     }
 }

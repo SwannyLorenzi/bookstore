@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">BookStore</string>
     <string name="book_cover">Book Cover</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm_delete_book">Are you sure to delete the book \"%1$s\"?</string>
 </resources>
