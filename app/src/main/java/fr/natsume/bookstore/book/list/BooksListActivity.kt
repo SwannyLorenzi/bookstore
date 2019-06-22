@@ -37,9 +37,10 @@ class BooksListActivity : AppCompatActivity(), BooksListAdapter.BooksListAdapter
     }
 
     private fun updateBooks(newBooks: List<Book>) {
-        Timber.d("Loading new books: $newBooks")
+        Timber.d("Loading new books. ${newBooks.size} books loaded.")
         books.clear()
         books.addAll(newBooks)
+        books.sortBy { it.title }
         booksAdapter.notifyDataSetChanged()
         swipeRefresh.isRefreshing = false
     }

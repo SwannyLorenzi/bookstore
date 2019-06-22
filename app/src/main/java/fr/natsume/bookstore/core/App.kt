@@ -16,7 +16,9 @@ class App : Application() {
         super.onCreate()
 
         Timber.plant(Timber.DebugTree())
-        db = Room.databaseBuilder(this, AppDatabase::class.java, DATABASE_NAME).build()
+        db = Room.databaseBuilder(this, AppDatabase::class.java, DATABASE_NAME)
+            .addMigrations(MIGRATION_1_2)
+            .build()
 
         repository = BookRepository()
         repository.scheduleSync()
