@@ -28,6 +28,8 @@ class BooksListActivity : AppCompatActivity(), BooksListAdapter.BooksListAdapter
             adapter = booksAdapter
         }
 
+        swipeRefresh.setOnRefreshListener { viewModel.refreshBooks() }
+
         viewModel = ViewModelProviders.of(this).get(BooksListViewModel::class.java)
         viewModel.books.observe(this, Observer { newBooks -> updateBooks(newBooks!!) })
     }
@@ -37,9 +39,10 @@ class BooksListActivity : AppCompatActivity(), BooksListAdapter.BooksListAdapter
         books.clear()
         books.addAll(newBooks)
         booksAdapter.notifyDataSetChanged()
+        swipeRefresh.isRefreshing = false
     }
 
     override fun onBookSelected(book: Book) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Timber.d("Select book: $book")
     }
 }

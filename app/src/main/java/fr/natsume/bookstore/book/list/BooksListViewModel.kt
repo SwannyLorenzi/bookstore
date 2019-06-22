@@ -8,4 +8,8 @@ import fr.natsume.bookstore.core.App
 class BooksListViewModel : ViewModel() {
 
     val books: LiveData<List<Book>> = App.db.bookDao().getAllBooks()
+
+    fun refreshBooks() {
+        App.repository.syncNow()
+    }
 }
