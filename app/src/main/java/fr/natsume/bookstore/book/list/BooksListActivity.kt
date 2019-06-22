@@ -1,5 +1,6 @@
 package fr.natsume.bookstore.book.list
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.natsume.bookstore.R
 import fr.natsume.bookstore.book.Book
+import fr.natsume.bookstore.book.detail.BookDetailActivity
 import kotlinx.android.synthetic.main.activity_books_list.*
 import timber.log.Timber
 
@@ -44,5 +46,8 @@ class BooksListActivity : AppCompatActivity(), BooksListAdapter.BooksListAdapter
 
     override fun onBookSelected(book: Book) {
         Timber.d("Select book: $book")
+        val intent = Intent(this, BookDetailActivity::class.java)
+        intent.putExtra(BookDetailActivity.EXTRA_BOOK_ID, book.id)
+        startActivity(intent)
     }
 }

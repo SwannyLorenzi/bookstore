@@ -13,7 +13,7 @@ import fr.natsume.bookstore.book.Book
 
 class BooksListAdapter(
     private val books: List<Book>
-    , private val listener: BooksListAdapterListener
+    , private val listener: BooksListAdapterListener?
 ) : RecyclerView.Adapter<BooksListAdapter.ViewHolder>(), View.OnClickListener {
 
     interface BooksListAdapterListener {
@@ -50,6 +50,8 @@ class BooksListAdapter(
     override fun getItemCount() = books.size
 
     override fun onClick(v: View?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        when (v?.id) {
+            R.id.cardView -> listener?.onBookSelected(v.tag as Book)
+        }
     }
 }
