@@ -11,7 +11,7 @@ class BookDetailViewModel(bookId: Long) : ViewModel() {
 
     private val bookIdLiveData = MutableLiveData<Long>()
 
-    val bookLiveData: LiveData<Book> = Transformations.switchMap(bookIdLiveData) { id ->
+    val book: LiveData<Book> = Transformations.switchMap(bookIdLiveData) { id ->
         App.db.bookDao().getBookById(id)
     }
 

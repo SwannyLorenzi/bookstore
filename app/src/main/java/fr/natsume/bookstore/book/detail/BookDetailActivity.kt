@@ -2,8 +2,12 @@ package fr.natsume.bookstore.book.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.squareup.picasso.Picasso
 import fr.natsume.bookstore.R
+import fr.natsume.bookstore.book.Book
+import kotlinx.android.synthetic.main.activity_book_detail.*
 import timber.log.Timber
 
 class BookDetailActivity : AppCompatActivity() {
@@ -23,5 +27,16 @@ class BookDetailActivity : AppCompatActivity() {
 
         val factory = BookDetailViewModelFactory(bookId)
         viewModel = ViewModelProviders.of(this, factory).get(BookDetailViewModel::class.java)
+        viewModel.book.observe(this, Observer { book -> updateBook(book!!) })
+    }
+
+    private fun updateBook(book: Book) {
+        Picasso.get()
+            .load(book.pictureUrl)
+            .placeholder(R.drawable.ic_placeholder_image)
+            .into(bookCover)
+        bookTitle.text = book.title
+        bookAuthor.text = book.author
+        bookSummary.text = book.summary
     }
 }
