@@ -68,7 +68,6 @@ class BooksListActivity : AppCompatActivity(), BooksListAdapter.BooksListAdapter
         Timber.d("Loading new books. ${newBooks.size} books loaded.")
         books.clear()
         books.addAll(newBooks)
-        books.sortBy { it.title }
         booksAdapter.notifyDataSetChanged()
         swipeRefresh.isRefreshing = false
     }

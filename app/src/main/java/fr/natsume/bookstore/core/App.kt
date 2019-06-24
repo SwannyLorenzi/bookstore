@@ -17,7 +17,6 @@ class App : Application() {
 
         Timber.plant(Timber.DebugTree())
         db = Room.databaseBuilder(this, AppDatabase::class.java, DATABASE_NAME)
-            .addMigrations(MIGRATION_1_2)
             .build()
 
         repository = BookRepository()

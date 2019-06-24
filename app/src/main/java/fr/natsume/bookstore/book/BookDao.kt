@@ -10,7 +10,7 @@ import androidx.room.Query
 @Dao
 interface BookDao {
 
-    @Query("SELECT * FROM book")
+    @Query("SELECT * FROM book ORDER BY title ASC")
     fun getAllBooks(): LiveData<List<Book>>
 
     @Query("SELECT * FROM book WHERE id = :id")
